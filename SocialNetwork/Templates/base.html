@@ -5,8 +5,6 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <!-- Userfriendly pentru mobile devices -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Proiect Social Network</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -14,18 +12,17 @@
     </head>
 
     <body>
-        <nav class="navbar is-info" role = "navigation">
-            <div class="navbar-brand">
-                <a href="/" class="navbar-item">NavBar</a>
+        <nav class="navbar navbar-expand-lg fixed-top navbar-transparent nav-down" color-on-scroll="200" role = "navigation">
+            <div class="container">
+                <div class="navbar-translate">
+                    <div class="navbar-header">
+                        <a href="/" class="navbar-item">NavBar</a>
 
-                <a class="navbar-burger">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
+                    </div>
+                </div>
             </div>
         </nav>
-        <section class = "section">
+        <section>
             {% block content %}
             {% endblock %}
         </section>

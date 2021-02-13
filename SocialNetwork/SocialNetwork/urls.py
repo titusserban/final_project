@@ -21,5 +21,4 @@ from Posts.views import homepage
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Posts.urls')),
-
 ]
