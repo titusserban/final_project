@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from Posts.views import homepage
+from Posts.views import signup
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include('Posts.urls')),
+    path('feed/', include('newsfeed.urls')),
+    path('admin/', admin.site.urls),
+
 ]
