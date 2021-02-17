@@ -6,9 +6,9 @@ from django.contrib.auth import views
 
 app_name = 'Posts'
 
-urlpatterns = (
-    path('homepage/', homepage, name='homepage'),
-    path('signup/', signup, name='signup'),
-    path('logout/', views.LogoutView.as_view(), name='logout'),
-
-)
+# urlpatterns = (
+#     path('homepage/', homepage, name='homepage'),
+#     path('signup/', signup, name='signup'),
+#     path('logout/', views.LogoutView.as_view(), name='logout'),
+#
+# )
