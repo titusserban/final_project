@@ -26,6 +26,7 @@ urlpatterns = [
     path('homepage/', homepage, name='homepage'),
     path('signup/', signup, name='signup'),
     path('logout/', views.LogoutView.as_view(), name='logout'),
+    # path('posts/', include('Posts.urls')),
     path('newsfeedpage/', newsfeed1, name='newsfeedpage'),
     path('admin/', admin.site.urls),
 

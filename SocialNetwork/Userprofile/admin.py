@@ -5,3 +5,5 @@ from django.contrib import admin
 from .models import UserProfile
 
 admin.site.register(UserProfile)
+#adaugam baza de data in interfata Django
+

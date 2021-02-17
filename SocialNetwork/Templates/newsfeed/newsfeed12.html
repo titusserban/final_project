@@ -1,15 +1,54 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<br xmlns:v-on="http://www.w3.org/1999/xhtml">
 <br>
 <br>
-<br>
-    <div class = "container">
+    <div class = "container" id="feedapp">
         <div class = "columns">
             <div class= "column">
-                <h1 class="title">NewsFeed</h1>
+                <div class="wrapper-form">
+                    <form v-on:submit.prevent="submitPost()">
+                        <div class="field">
+                            <div class="control">
+                                <textarea class="textarea" v-model="body" placeholder="Enter your text here:"></textarea>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <button>Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="wrapper-posts">
+                    <div class="post" v-for="post in posts">
+                        <p>[[ post.body ]]</p>
+                    </div>
+
+                </div>
             </div>
         </div>
 
     </div>
+{% endblock %}
+
+{% block script %}
+<script>
+    new Vue({
+        el: '#feedapp',
+        delimiters: ['[[', ']]'],
+        data () {
+            return {
+                posts: [],
+                body: ''
+            }
+        },
+        methods: {
+            submitPost() {
+                console.log('submitPost');
+            }
+        }
+    })
+</script>
 {% endblock %}
