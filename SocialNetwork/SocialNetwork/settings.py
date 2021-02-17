@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'newsfeed1'
+LOGIN_REDIRECT_URL = 'newsfeed'
 LOGOUT_REDIRECT_URL = 'homepage'
 
 # Application definition
