@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <h1 class="title">{{ user.username }}</h1>
+
+                <p>Followers: {{ user.userprofile.followed_by.count }}</p>
+                <p>Followers: {{ user.userprofile.follows.count }}</p>
+
+                {% if user != request.user %}
+                    <a href="{% url 'follow_user' user.username %}">Follow</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column">
+                <div class="wrapper-posts">
+                    {% for post in user.posts.all %}
+                        <div class="post">
+                            <p class="name">{{ post.created_by.username }}</p>
+                            <p>{{ post.body }}</p>
+                            <p class="info">{{ post.created_at }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -19,15 +19,20 @@ from django.urls import path, include
 
 
 from Posts.views import homepage, signup
-from newsfeed.views import newsfeed1
+from Userprofile.views import userprofile, follow_user
+from newsfeed.api import api_add_post
+from newsfeed.views import newsfeed1, search
 
 urlpatterns = [
     path('', views.LoginView.as_view(template_name='Registration/login.html'), name='login'),
     path('homepage/', homepage, name='homepage'),
     path('signup/', signup, name='signup'),
     path('logout/', views.LogoutView.as_view(), name='logout'),
-    # path('posts/', include('Posts.urls')),
     path('newsfeedpage/', newsfeed1, name='newsfeedpage'),
+    path('api/add_post/', api_add_post, name='api_add_post'),
+    path('search/', search, name='search'),
+    path('u/<str:username>/', userprofile, name='userprofile'),
+    path('u/<str:username>/follow/', follow_user, name='follow_user'),
     path('admin/', admin.site.urls),
 
 

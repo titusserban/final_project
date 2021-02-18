@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+
+    <div class = "container">
+        <div class = "columns">
+            <div class= "column">
+                <h1 class="title">Search</h1>
+                <p>Search term: "{{ query }}"</p>
+                <hr>
+                <form method="GET" action="{% url 'search' %}">
+                    <div class="field">
+                        <div class="control">
+                            <input type="text" class="input" name="query" value="{{ query }}">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <button>Search</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="search-results">
+                    {% for user in postusers %}
+                        <p>Results</p>
+                        <p>{{ user.username }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

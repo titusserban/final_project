@@ -5,4 +5,4 @@ from django.contrib import admin
 from .models import Feed
 
 admin.site.register(Feed)
-#adaugam baza de data in interfata Django
+#adaugam baza de date in interfata Django
