@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth import views
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 from Posts.views import homepage, signup
-from Userprofile.views import userprofile, follow_user
+from Userprofile.views import userprofile, follow_user, unfollow_user, followers, follows, edit_profile
 from newsfeed.api import api_add_post
 from newsfeed.views import newsfeed1, search
 
@@ -31,9 +33,13 @@ urlpatterns = [
     path('newsfeedpage/', newsfeed1, name='newsfeedpage'),
     path('api/add_post/', api_add_post, name='api_add_post'),
     path('search/', search, name='search'),
+    path('edit_profile/', edit_profile, name='edit_profile'),
     path('u/<str:username>/', userprofile, name='userprofile'),
     path('u/<str:username>/follow/', follow_user, name='follow_user'),
+    path('u/<str:username>/unfollow/', unfollow_user, name='unfollow_user'),
+    path('u/<str:username>/followers/', followers, name='followers'),
+    path('u/<str:username>/follows/', follows, name='follows'),
     path('admin/', admin.site.urls),
 
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_URL)

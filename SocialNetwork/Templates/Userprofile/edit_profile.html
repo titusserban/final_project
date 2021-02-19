@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <h1 class="title">Edit profile</h1>
+
+                {% if user.userprofile.avatar %}
+<!--                verificam daca userul are avatar-->
+                    <figure>
+                        <img src="{{ user.userprofile.avatar.url }}"
+                    </figure>
+                {% endif %}
+                <form method="post" enctype="multipart/form-data" action=".">
+<!--                avem nevoie de enctype="multipart/form-data" deoarece vom folosi fisiere-->
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="field">
+                        <div class="control">
+                            <button>Save changes</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

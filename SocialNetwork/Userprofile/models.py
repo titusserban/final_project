@@ -8,7 +8,9 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CharField)
     #Cand stergem userul, se sterge si userprofile
     follows = models.ManyToManyField('self', related_name="followed_by", symmetrical=False)
-    #Cand un user 'follows' un alt user, nu inseamna ca automat va fi 'followed' inapoi
+    #ymmetrical=False -> Cand un user 'follows' un alt user, nu inseamna ca automat va fi 'followed' inapoi
+    avatar = models.ImageField(upload_to='uploads/', blank=True, null=True)
+    #am instalat Pillow pentru a putea utiliza poze pentru avatar
 
 
 User.userprofile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])

@@ -33,6 +33,7 @@
                                 <a href="{% url 'logout' %}" class="btn btn-blue btn-fill btn-save">Log out</a>
                                 <a href="{% url 'search' %}" class="btn btn-blue btn-fill btn-save">Search</a>
                                 <a href="{% url 'userprofile' request.user.username %}" class="btn btn-blue btn-fill btn-save">Userprofile</a>
+                                <a href="{% url 'edit_profile' %}" class="btn btn-blue btn-fill btn-save">Edit profile</a>
                             {% else %}
                                 <a href="{% url 'signup' %}" class="btn btn-blue btn-fill btn-save"><strong>Sign Up</strong></a>
                                 <a href="{% url 'login' %}" class="btn btn-blue btn-fill btn-save">Log in</a>

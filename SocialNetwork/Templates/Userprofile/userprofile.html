@@ -11,11 +11,15 @@
             <div class="column">
                 <h1 class="title">{{ user.username }}</h1>
 
-                <p>Followers: {{ user.userprofile.followed_by.count }}</p>
-                <p>Followers: {{ user.userprofile.follows.count }}</p>
+                <p><a href="{% url 'followers' user.username %}"> Followers: {{ user.userprofile.followed_by.count }}</a></p>
+                <p><a href="{% url 'follows' user.username %}">Follows: {{ user.userprofile.follows.count }}</a></p>
 
                 {% if user != request.user %}
-                    <a href="{% url 'follow_user' user.username %}">Follow</a>
+                    {% if request.user.userprofile in user.userprofile.followed_by.all %}
+                        <a href="{% url 'unfollow_user' user.username %}">Unollow</a>
+                    {% else %}
+                        <a href="{% url 'follow_user' user.username %}">Follow</a>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>
