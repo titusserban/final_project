@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 
 from Posts.views import homepage, signup
 from Userprofile.views import userprofile, follow_user, unfollow_user, followers, follows, edit_profile
-from newsfeed.api import api_add_post, api_add_like
+from newsfeed.api import api_add_post, api_add_like, api_remove_like
 from newsfeed.views import newsfeed1, search
 
 urlpatterns = [
@@ -33,6 +33,7 @@ urlpatterns = [
     path('newsfeedpage/', newsfeed1, name='newsfeedpage'),
     path('api/add_post/', api_add_post, name='api_add_post'),
     path('api/add_like/', api_add_like, name='api_add_like'),
+    path('api/remove_like/', api_remove_like, name='api_remove_like'),
     path('search/', search, name='search'),
     path('edit_profile/', edit_profile, name='edit_profile'),
     path('u/<str:username>/', userprofile, name='userprofile'),

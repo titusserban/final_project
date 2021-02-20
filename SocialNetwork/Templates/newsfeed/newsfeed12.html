@@ -5,161 +5,195 @@
 <br>
 <br>
 <br>
-	    <div class="container" id="newsfeedapp">
-	        <div class="columns">
-	            <div class="column">
-	                <div class="wrapper-form">
-	                    <form v-on:submit.prevent="submitPost()">
-	                        <div class="field">
-	                            <div class="control">
-	                                <textarea class="textarea" v-model="body" placeholder="What do you want to post?"></textarea>
-	                            </div>
-	                        </div>
+    <div class="container" id="newsfeedapp">
+        <div class="columns">
+            <div class="column">
+                <div class="wrapper-form">
+                    <form v-on:submit.prevent="submitPost()">
+                        <div class="field">
+                            <div class="control">
+                                <textarea class="textarea" v-model="body" placeholder="What do you want to post?"></textarea>
+                            </div>
+                        </div>
 
-	                        <div class="field">
-	                            <div class="control">
-	                                <button>Submit</button>
-	                            </div>
-	                        </div>
-	                    </form>
-	                </div>
+                        <div class="field">
+                            <div class="control">
+                                <button>Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
-	                <div class="wrapper-posts">
-	                    <div class="post" v-for="post in posts">
-	                        <article class="media">
-	                            <figure>
-	                                <p class="image">
-	                                    <img :src="post.avatar">
-	                                </p>
-	                            </figure>
+                <div class="wrapper-posts">
+                    <div class="post" v-for="post in posts">
+                        <article class="media">
+                            <figure>
+                                <p class="image">
+                                    <img :src="post.avatar">
+                                </p>
+                            </figure>
 
-	                            <div class="media-content">
-	                                <div class="content">
-	                                    <p>
-	                                        <strong>[[ post.postUser ]]</strong>
-	                                        <small>[[ post.created_at ]]</small>
-	                                        <br>
-	                                        [[ post.body ]]
-	                                    </p>
-	                                </div>
-	                            </div>
-	                        </article>
-	                    </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong>[[ post.postUser ]]</strong>
+                                        <small>[[ post.created_at ]]</small>
+                                        <br>
+                                        [[ post.body ]]
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
 
-	                    {% for post in posts %}
-	                        <div class="post">
-	                            <article class="media">
-	                                <figure>
-	                                    <p class="image">
-	                                        {% if post.created_by.userprofile.avatar %}
-	                                            <img src="{{ post.created_by.userprofile.avatar.url }}">
-	                                        {% endif %}
-	                                    </p>
-	                                </figure>
+                    {% for post in posts %}
+                        <div class="post">
+                            <article class="media">
+                                <figure>
+                                    <p class="image">
+                                        {% if post.created_by.userprofile.avatar %}
+                                            <img src="{{ post.created_by.userprofile.avatar.url }}">
+                                        {% endif %}
+                                    </p>
+                                </figure>
 
-	                                <div class="media-content">
-	                                    <div class="content">
-	                                        <p>
-	                                            <strong><a href="{% url 'userprofile' post.created_by.username %}">{{ post.created_by.username }}</a></strong>
-	                                            <small>{{ post.created_at }}</small>
-	                                            <br>
-	                                            {{ post.body }}
-	                                            <br>
-	                                            <a @click="likePost({{ post.id}})" v-if="!liked_posts.includes({{ post.id }})">Like</a>
-	                                            <span v-if="liked_posts.includes({{ post.id }})">Liked</span>
-	                                            <small id="likes-{{ post.id }}">{{ post.likes.count }} likes</small>
-	                                        </p>
-	                                    </div>
-	                                </div>
-	                            </article>
-	                        </div>
-	                    {% endfor %}
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	{% endblock %}
+                                <div class="media-content">
+                                    <div class="content">
+                                        <p>
+                                            <strong><a href="{% url 'userprofile' post.created_by.username %}">{{ post.created_by.username }}</a></strong>
+                                            <small>{{ post.created_at }}</small>
+                                            <br>
+                                            {{ post.body }}
+                                            <br>
+                                            <a @click="likePost({{ post.id }})" v-if="!liked_posts.includes({{ post.id }})">Like</a>
+                                            <a @click="removeLikePost({{ post.id }})" v-if="liked_posts.includes({{ post.id }})">Remove like</a>
+                                            <small id="likes-{{ post.id }}">{{ post.likes.count }} likes</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 
-	{% block script %}
-	<script>
-	    new Vue({
-	        el: '#newsfeedapp',
-	        delimiters: ['[[', ']]'],
-	        data () {
-	            return {
-	                posts: [],
-	                body: '',
-	                postUser: '{{ request.user.username }}',
-	                created_at: 'Now',
-	                avatar: '{% if request.user.userprofile.avatar %}{{ request.user.userprofile.avatar.url }}{% endif %}',
-	                liked_posts: [{% for post in posts %}{% if post.liked %}{{ post.id }},{% endif %}{% endfor %}]
-	            }
-	        },
-	        methods: {
-	            likePost(post_id) {
-	                this.liked_posts.push(parseInt(post_id));
+{% block script %}
+<script>
+    new Vue({
+        el: '#newsfeedapp',
+        delimiters: ['[[', ']]'],
+        data () {
+            return {
+                posts: [],
+                body: '',
+                postUser: '{{ request.user.username }}',
+                created_at: 'Now',
+                avatar: '{% if request.user.userprofile.avatar %}{{ request.user.userprofile.avatar.url }}{% endif %}',
+                liked_posts: [{% for post in posts %}{% if post.liked %}{{ post.id }},{% endif %}{% endfor %}]
+            }
+        },
+        methods: {
+            likePost(post_id) {
+                this.liked_posts.push(parseInt(post_id));
 
-	                var post = {
-	                    'post_id': post_id
-	                };
+                var post = {
+                    'post_id': post_id
+                };
 
-	                fetch('/api/add_like/', {
-	                    method: 'POST',
-	                    headers: {
-	                        'Content-Type': 'application/json',
-	                        'X-CSRFToken': '{{ csrf_token }}'
-	                    },
-	                    credentials: 'same-origin',
-	                    body: JSON.stringify(post)
-	                })
-	                .then((response) => {
-	                    console.log(response);
-	                })
-	                .catch((error) => {
-	                    console.log(error);
-	                });
+                fetch('/api/add_like/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify(post)
+                })
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
 
-	                const el = document.getElementById('likes-' + post_id);
-	                const likes = parseInt(el.innerHTML.split(' ')[0] + 1);
-	                el.innerHTML = likes + ' likes';
-	            },
-	            submitPost () {
-	                console.log('submitPost');
+                const el = document.getElementById('likes-' + post_id);
+                const likes = parseInt(el.innerHTML.split(' ')[0] + 1);
+                el.innerHTML = likes + ' likes';
+            },
 
-	                if (this.body.length > 0) {
-	                    var post = {
-	                        'body': this.body,
-	                        'postUser': this.postUser,
-	                        'created_at': this.created_at,
-	                        'avatar': this.avatar
-	                    };
 
-	                    this.posts.unshift(post);
 
-	                    // Send to backend
+            removeLikePost(post_id) {
+                this.remove_liked_posts.push(parseInt(post_id));
 
-	                    fetch('/api/add_post/', {
-	                        method: 'POST',
-	                        headers: {
-	                            'Content-Type': 'application/json',
-	                            'X-CSRFToken': '{{ csrf_token }}'
-	                        },
-	                        credentials: 'same-origin',
-	                        body: JSON.stringify(post)
-	                    })
-	                    .then((response) => {
-	                        console.log(response);
-	                    })
-	                    .catch((error) => {
-	                        console.log(error);
-	                    });
-	                }
+                var post = {
+                    'post_id': post_id
+                };
 
-	                this.body = '';
-	            }
-	        }
-	    })
-	</script>
-	{% endblock %}
+                fetch('/api/remove_like/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify(post)
+                })
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+
+                const el = document.getElementById('likes-' - post_id);
+                const likes = parseInt(el.innerHTML.split(' ')[0] - 1);
+                el.innerHTML = likes - ' likes';
+            },
+
+
+
+
+            submitPost () {
+                console.log('submitPost');
+
+                if (this.body.length > 0) {
+                    var post = {
+                        'body': this.body,
+                        'postUser': this.postUser,
+                        'created_at': this.created_at,
+                        'avatar': this.avatar
+                    };
+
+                    this.posts.unshift(post);
+
+<!--                    trimitem catre backend-->
+
+                    fetch('/api/add_post/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        },
+                        credentials: 'same-origin',
+                        body: JSON.stringify(post)
+                    })
+                    .then((response) => {
+                        console.log(response);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                }
+
+                this.body = '';
+            }
+        }
+    })
+</script>
+{% endblock %}
 
 

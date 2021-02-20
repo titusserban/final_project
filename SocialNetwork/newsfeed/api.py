@@ -22,3 +22,12 @@ def api_add_like(request):
         #verificam daca userul a dat like
         like = Like.objects.create(post_id=post_id, created_by=request.user)
     return JsonResponse({'success': True})
+
+@login_required
+def api_remove_like(request):
+    data = json.loads(request.body)
+    post_id = data['post_id']
+    if Like.objects.filter(post_id=post_id).filter(created_by=request.user).exists():
+        #verificam daca userul a dat like
+        like = Like.objects.remove(post_id=post_id, created_by=request.user)
+    return JsonResponse({'success': True})
