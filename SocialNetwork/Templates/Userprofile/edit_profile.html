@@ -13,8 +13,8 @@
 
                 {% if user.userprofile.avatar %}
 <!--                verificam daca userul are avatar-->
-                    <figure>
-                        <img src="{{ user.userprofile.avatar.url }}"
+                    <figure class="figure-img img-fluid rounded shadow-3 mb-3">
+                        <img src="{{ user.userprofile.avatar.url }}">
                     </figure>
                 {% endif %}
                 <form method="post" enctype="multipart/form-data" action=".">

@@ -8,6 +8,15 @@ from .forms import UserProfileForm
 
 def userprofile(request, username):
     user = get_object_or_404(User, username=username)
+    posts = user.posts.all()
+
+    for post in posts:
+        likes = post.likes.filter(created_by_id=request.user.id)
+        if likes.count() > 0:
+            post.liked = True
+        else:
+            post.liked = False
+
     context = {
         "user": user
     }
@@ -28,7 +37,7 @@ def edit_profile(request):
         "user": request.user,
         "form": form,
     }
-    return render(request, "userprofile/edit_profile.html", context)
+    return render(request, "Userprofile/edit_profile.html", context)
 
 
 @login_required

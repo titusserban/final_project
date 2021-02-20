@@ -14,6 +14,13 @@ def newsfeed1(request):
 
     posts = Feed.objects.filter(created_by_id__in = user_ids)
 
+    for post in posts:
+        likes = post.likes.filter(created_by_id=request.user.id)
+        if likes.count() > 0:
+            post.liked = True
+        else:
+            post.liked = False
+
     return render(request, 'newsfeed/newsfeed12.html', {'posts': posts})
 
 
