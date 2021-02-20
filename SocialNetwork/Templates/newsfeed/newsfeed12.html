@@ -67,6 +67,7 @@
                                             <br>
                                             <a @click="likePost({{ post.id }})" v-if="!liked_posts.includes({{ post.id }})">Like</a>
                                             <a @click="removeLikePost({{ post.id }})" v-if="liked_posts.includes({{ post.id }})">Remove like</a>
+                                            <br/>
                                             <small id="likes-{{ post.id }}">{{ post.likes.count }} likes</small>
                                         </p>
                                     </div>
@@ -127,7 +128,7 @@
 
 
             removeLikePost(post_id) {
-                this.remove_liked_posts.push(parseInt(post_id));
+                this.liked_posts.push(parseInt(post_id));
 
                 var post = {
                     'post_id': post_id
@@ -149,9 +150,9 @@
                     console.log(error);
                 });
 
-                const el = document.getElementById('likes-' - post_id);
+                const el = document.getElementById('likes-' + post_id);
                 const likes = parseInt(el.innerHTML.split(' ')[0] - 1);
-                el.innerHTML = likes - ' likes';
+                el.innerHTML = likes + ' likes';
             },
 
 
@@ -187,6 +188,7 @@
                     .catch((error) => {
                         console.log(error);
                     });
+
                 }
 
                 this.body = '';
