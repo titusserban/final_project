@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 LOGIN_URL = 'login'
+#daca utilizatorul incearca sa acceseze o pagina la care nu are acces, va fi redirectionat catre pagina de login
 LOGIN_REDIRECT_URL = 'newsfeedpage'
 LOGOUT_REDIRECT_URL = 'homepage'
 

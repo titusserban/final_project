@@ -10,7 +10,6 @@ class UserProfile(models.Model):
     #Cand stergem userul, se sterge si userprofile + este mandatory
     follows = models.ManyToManyField('self', related_name="followed_by", symmetrical=False)
     #ManyToManyField creaza un tabel in care putem grupa toate persoanele pe care userul le "urmareste"
-    #related_name="followed_by" -> verificam de cine este verificat userul
     #symmetrical=False -> Cand un user 'follows' un alt user, nu inseamna ca automat va fi 'followed' inapoi
     avatar = models.ImageField(upload_to='uploads/', blank=True, null=True)
     #am instalat Pillow pentru a putea utiliza poze pentru avatar

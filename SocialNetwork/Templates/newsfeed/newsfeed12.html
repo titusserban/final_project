@@ -36,12 +36,6 @@
                 <div class="wrapper-posts">
                     <div class="post" v-for="post in posts">
                         <article class="media">
-                            <figure>
-                                <p class="image">
-                                    <img class="fluid" :src="post.avatar" >
-                                </p>
-                            </figure>
-
                             <div class="media-content">
                                 <div class="content">
                                     <p>
@@ -56,12 +50,13 @@
                     </div>
 
                     {% for post in posts %}
+                    {{post.created_by.userprofile.avatar.url}}
                         <div class="post">
                             <article class="media">
                                 <figure>
                                     <p class="image">
                                         {% if post.created_by.userprofile.avatar %}
-                                            <img class="fluid" src="{{ post.created_by.userprofile.avatar.url }}">
+                                            <img class="fluid" width="100px" height="100px" src="{{ post.created_by.userprofile.avatar.url }}">
                                         {% endif %}
                                     </p>
                                 </figure>
@@ -163,9 +158,6 @@
                 el.innerHTML = likes + ' likes';
             },
 
-
-
-
             submitPost () {
                 console.log('submitPost');
 
@@ -178,6 +170,7 @@
                     };
 
                     this.posts.unshift(post);
+<!--                    ordonam posturile de la cel mai recent la cel mai vechi-->
 
 <!--                    trimitem catre backend-->
 

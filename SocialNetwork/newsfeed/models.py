@@ -7,6 +7,7 @@ class Feed(models.Model):
     objects = None
     body = models.CharField(max_length=500)
     created_by = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE)
+    # cand se sterge un user, se vor sterge si posturile
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -18,5 +19,6 @@ class Like(models.Model):
     objects = None
     post = models.ForeignKey(Feed, related_name="likes", on_delete=models.CASCADE)
     #cand stergem un post, se va sterge si like-ul
+    #related_name="likes" pentru a putea prelua informatiile din baza de date prin feed.likes/user.likes
     created_by = models.ForeignKey(User, related_name='likes', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -22,11 +22,13 @@ def newsfeed1(request):
             post.liked = False
 
     return render(request, 'newsfeed/newsfeed12.html', {'posts': posts})
+    # {'posts': posts} pentru ca posturile sa fie disponibile pentru frontend
 
 
 @login_required
 def search(request):
     query = request.GET.get("query", "")
+    #"query", "", pentru a nu avea erori cand campul este gol
     if len(query) > 0:
         postusers = User.objects.filter(username__icontains=query)
     else:
