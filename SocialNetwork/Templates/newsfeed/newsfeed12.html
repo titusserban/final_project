@@ -23,13 +23,22 @@
                         </div>
                     </form>
                 </div>
+                <br/>
+                <br/>
+                <div class = "container">
+                    <div class = "columns">
+                        <div class= "column">
+                            <h1 class="title">Newsfeed:</h1>
+                        </div>
+                    </div>
 
+                </div>
                 <div class="wrapper-posts">
                     <div class="post" v-for="post in posts">
                         <article class="media">
                             <figure>
                                 <p class="image">
-                                    <img :src="post.avatar">
+                                    <img class="fluid" :src="post.avatar" >
                                 </p>
                             </figure>
 
@@ -52,11 +61,10 @@
                                 <figure>
                                     <p class="image">
                                         {% if post.created_by.userprofile.avatar %}
-                                            <img src="{{ post.created_by.userprofile.avatar.url }}">
+                                            <img class="fluid" src="{{ post.created_by.userprofile.avatar.url }}">
                                         {% endif %}
                                     </p>
                                 </figure>
-
                                 <div class="media-content">
                                     <div class="content">
                                         <p>

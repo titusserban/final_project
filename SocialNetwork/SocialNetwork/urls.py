@@ -25,6 +25,7 @@ from Userprofile.views import userprofile, follow_user, unfollow_user, followers
 from newsfeed.api import api_add_post, api_add_like, api_remove_like
 from newsfeed.views import newsfeed1, search
 
+
 urlpatterns = [
     path('', views.LoginView.as_view(template_name='Registration/login.html'), name='login'),
     path('homepage/', homepage, name='homepage'),
