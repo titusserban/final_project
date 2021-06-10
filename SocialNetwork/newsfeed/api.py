@@ -26,6 +26,7 @@ def api_add_like(request):
 @login_required
 def api_remove_like(request):
     data = json.loads(request.body)
+    print(data)
     post_id = data['post_id']
     if Like.objects.filter(post_id=post_id).filter(created_by=request.user).exists():
         #verificam daca userul a dat like

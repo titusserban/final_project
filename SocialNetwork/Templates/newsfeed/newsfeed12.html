@@ -50,13 +50,13 @@
                     </div>
 
                     {% for post in posts %}
-                    {{post.created_by.userprofile.avatar.url}}
+
                         <div class="post">
                             <article class="media">
                                 <figure>
                                     <p class="image">
                                         {% if post.created_by.userprofile.avatar %}
-                                            <img class="fluid" width="100px" height="100px" src="{{ post.created_by.userprofile.avatar.url }}">
+                                            <img class="fluid" width="100px" src="{{ post.created_by.userprofile.avatar.url }}">
                                         {% endif %}
                                     </p>
                                 </figure>
