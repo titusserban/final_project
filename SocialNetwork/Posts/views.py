@@ -7,7 +7,7 @@ def homepage(request):
     return render(request, 'Posts/homepage.html')
 
 
-def signup(request):
+def signup(request): 
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():

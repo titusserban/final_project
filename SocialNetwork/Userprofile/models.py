@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     objects = None
-    user = models.OneToOneField(User, on_delete=models.CharField)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     # OneToOneField ne permite sa avem mai multe profile
     #Cand stergem userul, se sterge si userprofile + este mandatory
     follows = models.ManyToManyField('self', related_name="followed_by", symmetrical=False)
